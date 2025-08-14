@@ -18,10 +18,28 @@ export class App implements OnInit {
     // Corrected line: Add <any[]> to specify the expected return type
     this.http.get<any[]>(this.APIUrl + 'GetNotes').subscribe(data => {
       this.notes = data;
-    });
+    })
   }
 
   ngOnInit() {
     this.refreshNotes();
   }
+
+addNotes(){
+  var newNotes=(<HTMLInputElement>document.getElementById("newNotes")).value;
+  var formData=new FormData();
+  formData.append("newNotes",newNotes);
+  this.http.post(this.APIUrl+'AddNotes',formData).subscribe(data=>{
+    alert(data);
+    this.refreshNotes();
+  })
+}
+
+deleteNotes(id:any){
+  
+  this.http.delete(this.APIUrl+'DeleteNotes?id='+id).subscribe(data=>{
+    alert(data);
+    this.refreshNotes();
+  })
+}
 }

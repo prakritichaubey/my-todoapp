@@ -1,4 +1,9 @@
 <h1>TodoApp</h1>
-<h3 *ngFor="let note of notes">
-  <b>*{{ note.decription }}</b>
-</h3>
+
+<input id="newNotes">
+<button (click)="addNotes()">Add Notes</button>
+
+<h2 *ngFor="let note of notes">
+  <b>*{{ note.decription || 'No description found' }}</b>
+  <button (click)="deleteNotes(note.id)">Delete Notes</button>
+</h2>
